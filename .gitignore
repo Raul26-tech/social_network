@@ -1,7 +1,10 @@
+# Environments
 .env
 
-
+# Diretories
 **/node_modules
 
-**/postgres-data
 
+# Custom
+**/postgres-data
+dist
