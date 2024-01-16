@@ -1,5 +1,7 @@
-node_modules
-postgres-data
-
-
 .env
+
+
+**/node_modules
+
+**/postgres-data
+
