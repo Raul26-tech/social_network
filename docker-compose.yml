@@ -1,0 +1,41 @@
+networks:
+  main-network:
+    driver: bridge
+
+services:
+  backend-api:
+    container_name: social_network_api
+    restart: always
+    env_file:
+      - .env
+    build: .
+    ports:
+      - ${PORT}:${PORT}
+    networks:
+      - main-network
+    command: > 
+      sh -c "yarn start"
+    volumes:
+      - ./:/usr/src
+      - ./node_modules:/usr/src/node_modules
+    depends_on:
+      - backend-database
+
+
+  backend-database:
+    container_name: social_network_database
+    image: postgres
+    restart: always
+    env_file:
+      - .env 
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_DATABASE: ${DB_DATABASE} 
+    networks:
+      - main-network
+    command: -p ${DB_PORT}
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
