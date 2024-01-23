@@ -17,6 +17,9 @@ class AuthenticationUserService {
     const userTokenRepository = new UserTokenRepository();
 
     const user = await userRepository.findByEmail(email);
+    const userToken = await userTokenRepository.findByToken(user.id);
+
+    console.log("status do usuário aaaa", userToken);
 
     if (!user) {
       throw new AppError("Usuário ou senha incorreto(s)");
@@ -34,6 +37,7 @@ class AuthenticationUserService {
       expiresIn: auth.auth_expired_token,
     });
 
+    // Criando Token
     await userTokenRepository.createUserToken(user.id);
 
     return {
