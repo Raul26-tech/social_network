@@ -5,9 +5,11 @@ import bcrypt from "bcryptjs";
 import auth from "../../../config/auth";
 import { User } from "../infra/typeorm/entities/User";
 import { UserTokenRepository } from "../infra/typeorm/repositories/UserTokenRepository";
+import { AppDataSource } from "../../../shared/infra/typeorm/connectDatabase";
+import { UserToken } from "../infra/typeorm/entities/UserToken";
 
 interface IResponse {
-  token: string;
+  token?: string;
   user: User;
 }
 
@@ -31,13 +33,32 @@ class AuthenticationUserService {
       throw new AppError("Usuário ou senha incorreto(s)");
     }
 
+    if (userToken) {
+      console.log("Ja possuí token");
+      const currentToken = AppDataSource.getRepository(UserToken);
+
+      await currentToken.update({ status: "active" }, { status: "inactive" });
+
+      // Assinando o token
+      const token = sign({}, auth.auth_secret_token, {
+        subject: user.id,
+        expiresIn: auth.auth_expired_token,
+      });
+
+      await userTokenRepository.createUserToken(user.id);
+
+      console.log("aqui no if");
+
+      return { user, token };
+    }
+
     // Assinando o token
     const token = sign({}, auth.auth_secret_token, {
       subject: user.id,
       expiresIn: auth.auth_expired_token,
     });
 
-    // Criando Token
+    console.log("Aqui no final");
     await userTokenRepository.createUserToken(user.id);
 
     return {

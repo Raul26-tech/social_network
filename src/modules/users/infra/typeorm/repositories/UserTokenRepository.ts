@@ -24,6 +24,10 @@ class UserTokenRepository implements IUserTokenRepositories {
     const user = await this.repository.findOne({ where: { userId } });
     return user;
   }
+
+  //  async updatedToken(id: string) {
+
+  //   }
 }
 
 export { UserTokenRepository };
