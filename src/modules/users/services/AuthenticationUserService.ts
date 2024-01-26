@@ -21,7 +21,7 @@ class AuthenticationUserService {
     const user = await userRepository.findByEmail(email);
     const userToken = await userTokenRepository.findByToken(user.id);
 
-    console.log("status do usuário aaaa", userToken);
+    console.log({ user, userToken });
 
     if (!user) {
       throw new AppError("Usuário ou senha incorreto(s)");
@@ -33,24 +33,9 @@ class AuthenticationUserService {
       throw new AppError("Usuário ou senha incorreto(s)");
     }
 
-    if (userToken) {
-      console.log("Ja possuí token");
-      const currentToken = AppDataSource.getRepository(UserToken);
-
-      await currentToken.update({ status: "active" }, { status: "inactive" });
-
-      // Assinando o token
-      const token = sign({}, auth.auth_secret_token, {
-        subject: user.id,
-        expiresIn: auth.auth_expired_token,
-      });
-
-      await userTokenRepository.createUserToken(user.id);
-
-      console.log("aqui no if");
-
-      return { user, token };
-    }
+    // 1 - Filtrar o token do usuário que está fazendo login
+    // 3 - Caso o user já tenha token, atualizar o status do token para inativo e criar um novo token
+    // 4 - se o usuário não estiver logado, ele fará o login normalmente
 
     // Assinando o token
     const token = sign({}, auth.auth_secret_token, {
@@ -58,7 +43,6 @@ class AuthenticationUserService {
       expiresIn: auth.auth_expired_token,
     });
 
-    console.log("Aqui no final");
     await userTokenRepository.createUserToken(user.id);
 
     return {
