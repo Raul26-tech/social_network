@@ -7,7 +7,7 @@ import { User } from "../infra/typeorm/entities/User";
 import { UserTokenRepository } from "../infra/typeorm/repositories/UserTokenRepository";
 
 interface IResponse {
-  token: string;
+  token?: string;
   user: User;
 }
 
@@ -17,6 +17,7 @@ class AuthenticationUserService {
     const userTokenRepository = new UserTokenRepository();
 
     const user = await userRepository.findByEmail(email);
+    const userToken = await userTokenRepository.findByToken(user.id);
 
     if (!user) {
       throw new AppError("Usuário ou senha incorreto(s)");
@@ -27,6 +28,10 @@ class AuthenticationUserService {
     if (!pwd) {
       throw new AppError("Usuário ou senha incorreto(s)");
     }
+
+    // 1 - Filtrar o token do usuário que está fazendo login
+    // 3 - Caso o user já tenha token, atualizar o status do token para inativo e criar um novo token
+    // 4 - se o usuário não estiver logado, ele fará o login normalmente
 
     // Assinando o token
     const token = sign({}, auth.auth_secret_token, {
