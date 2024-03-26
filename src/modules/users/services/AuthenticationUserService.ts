@@ -5,8 +5,6 @@ import bcrypt from "bcryptjs";
 import auth from "../../../config/auth";
 import { User } from "../infra/typeorm/entities/User";
 import { UserTokenRepository } from "../infra/typeorm/repositories/UserTokenRepository";
-import { AppDataSource } from "../../../shared/infra/typeorm/connectDatabase";
-import { UserToken } from "../infra/typeorm/entities/UserToken";
 
 interface IResponse {
   token?: string;
@@ -20,8 +18,6 @@ class AuthenticationUserService {
 
     const user = await userRepository.findByEmail(email);
     const userToken = await userTokenRepository.findByToken(user.id);
-
-    console.log({ user, userToken });
 
     if (!user) {
       throw new AppError("Usuário ou senha incorreto(s)");
