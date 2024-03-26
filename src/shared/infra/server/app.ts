@@ -1,9 +1,9 @@
 import "reflect-metadata";
 import express from "express";
 import "express-async-errors";
-import { connectDatabase } from "../typeorm/connectDatabase";
-import { router } from "./routes";
-import { catchErrors } from "../middlewares/catchError";
+import { connectDatabase } from "@shared/infra/db/connectDatabase";
+import { catchErrors } from "../http/middlewares/catchError";
+import { router } from "../http/routes";
 
 const app = express();
 app.use(express.json());

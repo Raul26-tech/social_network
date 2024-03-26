@@ -2,7 +2,7 @@ import { Repository } from "typeorm";
 import { sign } from "jsonwebtoken";
 import { IUserTokenRepositories } from "../../../irepositories/IUserTokenRepositories";
 import { UserToken } from "../entities/UserToken";
-import { AppDataSource } from "../../../../../shared/infra/typeorm/connectDatabase";
+import { AppDataSource } from "../../../../../shared/infra/db/connectDatabase";
 import auth from "../../../../../config/auth";
 
 class UserTokenRepository implements IUserTokenRepositories {
