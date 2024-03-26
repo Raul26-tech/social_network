@@ -31,6 +31,9 @@ class UserToken {
 
   @Column({ name: "user_id", type: "uuid" })
   userId: string;
+
+  @Column({ name: "status", type: "varchar" })
+  status: "inactive" | "active";
 }
 
 export { UserToken };

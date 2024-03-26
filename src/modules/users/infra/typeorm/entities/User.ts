@@ -39,6 +39,30 @@ class User {
 
   @Column({ type: "varchar" })
   status: string;
+
+  @Column({ type: "varchar" })
+  avatar: string;
+
+  @Column({ type: "varchar" })
+  phone: string;
+
+  @Column({ type: "varchar" })
+  cellPhone: string;
+
+  @Column({ type: "varchar" })
+  postalCode: string;
+
+  @Column({ type: "varchar" })
+  street: string;
+
+  @Column({ type: "varchar" })
+  number: string;
+
+  @Column({ type: "varchar" })
+  district: string;
+
+  @Column({ type: "varchar" })
+  state: string;
 }
 
 export { User };
