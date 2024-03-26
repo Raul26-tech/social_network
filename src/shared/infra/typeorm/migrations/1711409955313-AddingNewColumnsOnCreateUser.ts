@@ -8,6 +8,7 @@ export class AddingNewColumnsOnCreateUser1711409955313
       new TableColumn({
         name: "avatar",
         type: "varchar",
+
         isNullable: true,
       }),
 
