@@ -2,7 +2,7 @@ import { Repository } from "typeorm";
 import { IUserRepository } from "../../../irepositories/IUserRepositories";
 import { User } from "../entities/User";
 import { ICreateUserDTO } from "../../../dto/ICreateUserDTO";
-import { AppDataSource } from "../../../../../shared/infra/typeorm/connectDatabase";
+import { AppDataSource } from "../../../../../shared/infra/db/connectDatabase";
 
 class UserRepository implements IUserRepository {
   private repository: Repository<User>;

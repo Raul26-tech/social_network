@@ -1,5 +1,5 @@
 import { DataSource } from "typeorm";
-import environment from "../../../config/environment";
+import environment from "@config/environment";
 
 export const AppDataSource = new DataSource({
   type: environment.DB_TYPE,

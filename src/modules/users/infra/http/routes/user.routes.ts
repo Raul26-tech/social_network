@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { CreateUserController } from "../controllers/CreateUserController";
 import { ListUsersController } from "../controllers/ListUsersController";
-import { isAuthenticated } from "../../../../../shared/infra/middlewares/IsAuthenticated";
+import { isAuthenticated } from "../../../../../shared/infra/http/middlewares/IsAuthenticated";
 
 const userRoutes = Router();
 
