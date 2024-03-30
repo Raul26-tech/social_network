@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "tsx watch --env-file=.env src/shared/infra/http/server.ts"
+    "start": "tsx watch --env-file=.env src/shared/infra/server/server.ts"
   },
   "dependencies": {
     "@types/express": "^4.17.21",

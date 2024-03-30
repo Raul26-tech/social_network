@@ -10,7 +10,7 @@ class AuthUserController {
 
     response.setHeader("token", token);
 
-    console.log("Aqui");
+    console.log(request.header["authorization"]);
 
     return response.json({ token, user });
   }

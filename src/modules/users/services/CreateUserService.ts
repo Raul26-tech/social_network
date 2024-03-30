@@ -12,6 +12,16 @@ class CreateUSerService {
     gender,
     status,
     type,
+    avatar,
+    cellPhone,
+    phone,
+    postalCode,
+    street,
+    number,
+    complement,
+    district,
+    city,
+    state,
   }: ICreateUserDTO) {
     const userRepository = new UserRepository();
     const userEmail = await userRepository.findByEmail(email);
@@ -35,6 +45,16 @@ class CreateUSerService {
       gender,
       status: status || "active",
       type: type || "user",
+      avatar,
+      phone,
+      cellPhone,
+      postalCode,
+      street,
+      number,
+      complement,
+      district,
+      city,
+      state,
     });
 
     return user;

@@ -18,6 +18,16 @@ class UserRepository implements IUserRepository {
     gender,
     status,
     type,
+    avatar,
+    cellPhone,
+    phone,
+    postalCode,
+    street,
+    number,
+    complement,
+    district,
+    city,
+    state,
   }: ICreateUserDTO) {
     const user = this.repository.create({
       name,
@@ -26,6 +36,16 @@ class UserRepository implements IUserRepository {
       gender,
       status,
       type,
+      avatar,
+      cellPhone,
+      phone,
+      postalCode,
+      street,
+      number,
+      district,
+      complement,
+      city,
+      state,
     });
 
     await this.repository.save(user);

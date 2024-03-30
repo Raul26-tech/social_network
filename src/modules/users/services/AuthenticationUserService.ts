@@ -29,10 +29,6 @@ class AuthenticationUserService {
       throw new AppError("Usuário ou senha incorreto(s)");
     }
 
-    // 1 - Filtrar o token do usuário que está fazendo login
-    // 3 - Caso o user já tenha token, atualizar o status do token para inativo e criar um novo token
-    // 4 - se o usuário não estiver logado, ele fará o login normalmente
-
     // Assinando o token
     const token = sign({}, auth.auth_secret_token, {
       subject: user.id,
