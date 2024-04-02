@@ -15,12 +15,15 @@ Este é um projeto de uma rede social simples desenvolvida como parte de um curs
 
 ```bash
 git clone https://github.com/Raul26-tech/social_network.git
+```
+2. Instale as depedências:
 
+```bash
 cd social_network
 npm install
 ```
 
-2. Configure as variáveis de ambiente:
+3. Configure as variáveis de ambiente:
    
 - Crie um arquivo `.env` na raiz do projeto e defina as seguintes variáveis de ambiente:
 ```bash
@@ -30,7 +33,7 @@ JWT_SECRET=your_jwt_secret
 ```
 Substitua your_database_connection_string pela string de conexão do seu banco de dados e your_jwt_secret por uma chave secreta para assinar tokens JWT.
 
-3. Inicie o servidor
+4. Inicie o servidor
 ```bash
 npm start
 ```
