@@ -1,10 +1,10 @@
 import { sign } from "jsonwebtoken";
 import { AppError } from "../../../shared/errors/AppError";
-import { UserRepository } from "../infra/typeorm/repositories/UserRepository";
+import { UserRepository } from "../../users/infra/typeorm/repositories/UserRepository";
 import bcrypt from "bcryptjs";
 import auth from "../../../config/auth";
-import { User } from "../infra/typeorm/entities/User";
-import { UserTokenRepository } from "../infra/typeorm/repositories/UserTokenRepository";
+import { User } from "../../users/infra/typeorm/entities/User";
+import { RefreshTokenRepository } from "../infra/typeorm/repositories/RefresTokenRepository";
 
 interface IResponse {
   token?: string;
@@ -14,7 +14,7 @@ interface IResponse {
 class AuthenticationUserService {
   async execute(email: string, password: string): Promise<IResponse> {
     const userRepository = new UserRepository();
-    const userTokenRepository = new UserTokenRepository();
+    const userTokenRepository = new RefreshTokenRepository();
 
     const user = await userRepository.findByEmail(email);
     const userToken = await userTokenRepository.findByToken(user.id);

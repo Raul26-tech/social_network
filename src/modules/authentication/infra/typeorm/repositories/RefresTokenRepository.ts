@@ -1,15 +1,13 @@
 import { Repository } from "typeorm";
-import { sign } from "jsonwebtoken";
-import { IUserTokenRepositories } from "../../../irepositories/IUserTokenRepositories";
-import { UserToken } from "../entities/UserToken";
+import { IUserTokenRepositories } from "../../../irepositories/IRefreshTokenRepositories";
+import { RefreshToken } from "../entities/RefreshToken";
 import { AppDataSource } from "../../../../../shared/infra/db/connectDatabase";
-import auth from "../../../../../config/auth";
 
-class UserTokenRepository implements IUserTokenRepositories {
-  private repository: Repository<UserToken>;
+class RefreshTokenRepository implements IUserTokenRepositories {
+  private repository: Repository<RefreshToken>;
 
   constructor() {
-    this.repository = AppDataSource.getRepository(UserToken);
+    this.repository = AppDataSource.getRepository(RefreshToken);
   }
 
   async createUserToken(userId: string) {
@@ -28,4 +26,4 @@ class UserTokenRepository implements IUserTokenRepositories {
   }
 }
 
-export { UserTokenRepository };
+export { RefreshTokenRepository };
