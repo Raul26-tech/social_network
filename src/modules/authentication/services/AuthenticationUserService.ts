@@ -5,6 +5,7 @@ import bcrypt from "bcryptjs";
 import auth from "../../../config/auth";
 import { User } from "../../users/infra/typeorm/entities/User";
 import { RefreshTokenRepository } from "../infra/typeorm/repositories/RefresTokenRepository";
+import { container } from "@shared/container/inversify.config";
 
 interface IResponse {
   token?: string;
