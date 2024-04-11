@@ -2,6 +2,16 @@
 
 Este é um projeto de uma rede social simples desenvolvida como parte de um curso de desenvolvimento web. A aplicação permite que os usuários se cadastrem, façam login, postem mensagens, sigam outros usuários e interajam por meio de comentários.
 
+## Tecnologias utilizadas
+
+- ``Node js``
+- ``Typescript``
+- ``Èxpress js``
+- ``Typeorm``
+- ``PostgreSQL``
+- ``Json Web Token (JWT)``
+- ``Inversify``
+
 ## Funcionalidades Principais
 
 - **Cadastro e Login de Usuários**: Os usuários podem se cadastrar com um e-mail e senha, e fazer login posteriormente.
