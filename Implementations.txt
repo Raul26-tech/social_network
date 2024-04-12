@@ -1,0 +1,7 @@
+ Proximos passos
+
+ [] - Implementação da injeção de dependência nos services e nos repositories
+ [] - Refatorar a altenticação
+ [] - Criar schemas para validar a entrada de dados
+ [] - Criar rotina de testes para a aplicação:
+        - Há princípio criar o teste de altenticação

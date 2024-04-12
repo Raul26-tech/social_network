@@ -1,27 +1,40 @@
-import { Repository } from "typeorm";
-import { IUserTokenRepositories } from "../../../irepositories/IRefreshTokenRepositories";
+import { EntityManager, Repository } from "typeorm";
 import { RefreshToken } from "../entities/RefreshToken";
-import { AppDataSource } from "../../../../../shared/infra/db/connectDatabase";
+import { injectable } from "inversify";
+import { BaseRepository } from "@shared/infra/typeorm/repositories/BaseRepository";
+import { ICreateRefreshTokenDTO } from "@modules/authentication/dto/CreateRefreshTokenDTO";
 
-class RefreshTokenRepository implements IUserTokenRepositories {
-  private repository: Repository<RefreshToken>;
+@injectable()
+class RefreshTokenRepository extends BaseRepository {
+  private _repository: Repository<RefreshToken>;
 
-  constructor() {
-    this.repository = AppDataSource.getRepository(RefreshToken);
+  constructor(manager?: EntityManager) {
+    super(manager);
+    this._repository = this.dataSource.getRepository(RefreshToken);
   }
 
-  async createUserToken(userId: string) {
-    const token = this.repository.create({
+  async createUserToken({
+    email,
+    expirationTime,
+    issuedAt,
+    token,
+    userId,
+  }: ICreateRefreshTokenDTO) {
+    const refreshToken = this._repository.create({
       userId,
+      email,
+      token,
+      expirationTime,
+      issuedAt,
     });
 
-    await this.repository.save(token);
+    await this._repository.save(refreshToken);
 
-    return token;
+    return refreshToken;
   }
 
   async findByToken(userId: string) {
-    const user = await this.repository.findOne({ where: { userId } });
+    const user = await this._repository.findOne({ where: { userId } });
     return user;
   }
 }
