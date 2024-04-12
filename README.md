@@ -1,4 +1,4 @@
-# Social Network
+# UnityNetwork
 
 Este é um projeto de uma rede social simples desenvolvida como parte de um curso de desenvolvimento web. A aplicação permite que os usuários se cadastrem, façam login, postem mensagens, sigam outros usuários e interajam por meio de comentários.
 
