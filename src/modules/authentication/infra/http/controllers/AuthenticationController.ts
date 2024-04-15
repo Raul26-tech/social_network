@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { AuthenticationUserService } from "../../../services/AuthenticationUserService";
 
-class AuthUserController {
+class AuthenticationController {
   async handle(request: Request, response: Response) {
     const { email, password } = request.body;
     const authUser = new AuthenticationUserService();
@@ -10,10 +10,10 @@ class AuthUserController {
 
     response.setHeader("token", token);
 
-    console.log("Aqui");
+    console.log(request.header["authorization"]);
 
     return response.json({ token, user });
   }
 }
 
-export { AuthUserController };
+export { AuthenticationController };

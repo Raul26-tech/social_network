@@ -1,14 +1,16 @@
-import { Repository } from "typeorm";
-import { IUserRepository } from "../../../irepositories/IUserRepositories";
+import { EntityManager, Repository } from "typeorm";
 import { User } from "../entities/User";
 import { ICreateUserDTO } from "../../../dto/ICreateUserDTO";
-import { AppDataSource } from "../../../../../shared/infra/db/connectDatabase";
+import { BaseRepository } from "@shared/infra/typeorm/repositories/BaseRepository";
+import { injectable } from "inversify";
 
-class UserRepository implements IUserRepository {
-  private repository: Repository<User>;
+@injectable()
+class UserRepository extends BaseRepository {
+  private _repository: Repository<User>;
 
-  constructor() {
-    this.repository = AppDataSource.getRepository(User);
+  constructor(manager?: EntityManager) {
+    super(manager);
+    this._repository = this.dataSource.getRepository(User);
   }
 
   async create({
@@ -18,23 +20,43 @@ class UserRepository implements IUserRepository {
     gender,
     status,
     type,
+    avatar,
+    cellPhone,
+    phone,
+    postalCode,
+    street,
+    number,
+    complement,
+    district,
+    city,
+    state,
   }: ICreateUserDTO) {
-    const user = this.repository.create({
+    const user = this._repository.create({
       name,
       email,
       password,
       gender,
       status,
       type,
+      avatar,
+      cellPhone,
+      phone,
+      postalCode,
+      street,
+      number,
+      district,
+      complement,
+      city,
+      state,
     });
 
-    await this.repository.save(user);
+    await this._repository.save(user);
 
     return user;
   }
 
   async findByEmail(email: string) {
-    const user = await this.repository.findOne({
+    const user = await this._repository.findOne({
       where: { email },
     });
 
@@ -42,7 +64,7 @@ class UserRepository implements IUserRepository {
   }
 
   async listUsers() {
-    const users = await this.repository.find();
+    const users = await this._repository.find();
 
     return users;
   }

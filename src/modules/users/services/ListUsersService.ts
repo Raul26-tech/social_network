@@ -1,10 +1,15 @@
+import { inject, injectable } from "inversify";
 import { UserRepository } from "../infra/typeorm/repositories/UserRepository";
 
+@injectable()
 class ListUsersService {
-  async execute() {
-    const users = new UserRepository();
+  constructor(
+    @inject("UserRepository")
+    private _userRepsitory: UserRepository
+  ) {}
 
-    return await users.listUsers();
+  async execute() {
+    return await this._userRepsitory.listUsers();
   }
 }
 
