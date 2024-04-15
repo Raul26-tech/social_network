@@ -46,10 +46,10 @@ class User {
   @Column({ type: "varchar" })
   phone: string;
 
-  @Column({ type: "varchar" })
+  @Column({ name: "cell_phone", type: "varchar" })
   cellPhone: string;
 
-  @Column({ type: "varchar" })
+  @Column({ name: "postal_code", type: "varchar" })
   postalCode: string;
 
   @Column({ type: "varchar" })
@@ -59,7 +59,13 @@ class User {
   number: string;
 
   @Column({ type: "varchar" })
+  complement: string;
+
+  @Column({ type: "varchar" })
   district: string;
+
+  @Column({ type: "varchar" })
+  city: string;
 
   @Column({ type: "varchar" })
   state: string;

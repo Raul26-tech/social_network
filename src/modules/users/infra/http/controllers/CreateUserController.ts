@@ -3,8 +3,25 @@ import { CreateUSerService } from "../../../services/CreateUserService";
 
 class CreateUserController {
   async handle(request: Request, response: Response) {
-    const { name, email, password, passwordConfirm, gender, status, type } =
-      request.body;
+    const {
+      name,
+      email,
+      password,
+      passwordConfirm,
+      gender,
+      status,
+      type,
+      avatar,
+      cellPhone,
+      phone,
+      postalCode,
+      street,
+      number,
+      complement,
+      district,
+      city,
+      state,
+    } = request.body;
     const createUserService = new CreateUSerService();
 
     const user = await createUserService.excute({
@@ -15,6 +32,16 @@ class CreateUserController {
       passwordConfirm,
       status,
       type,
+      avatar,
+      cellPhone,
+      phone,
+      postalCode,
+      street,
+      number,
+      complement,
+      district,
+      city,
+      state,
     });
 
     return response.status(201).json(user);

@@ -3,8 +3,8 @@ networks:
     driver: bridge
 
 services:
-  backend-api:
-    container_name: social_network_api
+  unity-api:
+    container_name: unity_network_api
     restart: always
     env_file:
       - .env
@@ -19,11 +19,11 @@ services:
       - ./:/usr/src
       - ./node_modules:/usr/src/node_modules
     depends_on:
-      - backend-database
+      - unity-database
 
 
-  backend-database:
-    container_name: social_network_database
+  unity-database:
+    container_name: unity_network_database
     image: postgres
     restart: always
     env_file:
