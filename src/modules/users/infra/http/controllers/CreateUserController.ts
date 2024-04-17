@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { CreateUSerService } from "../../../services/CreateUserService";
+import { container } from "@shared/container/inversify.config";
 
 class CreateUserController {
   async handle(request: Request, response: Response) {
@@ -22,7 +23,7 @@ class CreateUserController {
       city,
       state,
     } = request.body;
-    const createUserService = new CreateUSerService();
+    const createUserService = container.resolve(CreateUSerService);
 
     const user = await createUserService.excute({
       name,

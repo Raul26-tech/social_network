@@ -19,8 +19,7 @@ export class CreateRefreshToken1712103437456 implements MigrationInterface {
           },
           {
             name: "email",
-            type: "timestamp",
-            default: "now()",
+            type: "varchar",
           },
 
           {
@@ -28,7 +27,7 @@ export class CreateRefreshToken1712103437456 implements MigrationInterface {
             type: "uuid",
           },
           {
-            name: "issue_at",
+            name: "issued_at",
             type: "timestamp",
           },
           {

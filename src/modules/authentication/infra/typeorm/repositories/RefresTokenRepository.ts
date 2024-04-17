@@ -14,19 +14,21 @@ class RefreshTokenRepository extends BaseRepository {
   }
 
   async create({
-    email,
-    expirationTime,
-    issuedAt,
-    token,
     userId,
+    email,
+    token,
+    issuedAt,
+    expirationTime,
   }: ICreateRefreshTokenDTO) {
     const refreshToken = this._repository.create({
       userId,
       email,
       token,
-      expirationTime,
       issuedAt,
+      expirationTime,
     });
+
+    console.log(refreshToken);
 
     await this._repository.save(refreshToken);
 

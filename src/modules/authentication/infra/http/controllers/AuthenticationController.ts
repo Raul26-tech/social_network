@@ -1,18 +1,20 @@
 import { Request, Response } from "express";
-import { AuthenticationUserService } from "../../../services/AuthenticationUserService";
+import { LoginService } from "../../../services/LoginService";
+import { container } from "@shared/container/inversify.config";
 
 class AuthenticationController {
   async handle(request: Request, response: Response) {
     const { email, password } = request.body;
-    const authUser = new AuthenticationUserService();
+    const loginService = container.resolve(LoginService);
 
-    const { token, user } = await authUser.execute(email, password);
+    const { accesToken, user } = await loginService.execute({
+      email,
+      password,
+    });
 
-    response.setHeader("token", token);
+    response.setHeader("accessToken", accesToken);
 
-    console.log(request.header["authorization"]);
-
-    return response.json({ token, user });
+    return response.json({ accesToken, user });
   }
 }
 

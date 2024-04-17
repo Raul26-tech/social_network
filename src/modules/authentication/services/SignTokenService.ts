@@ -17,19 +17,17 @@ class SignTokenService {
     const accesToken = sign({}, auth.auth_secret_token, {
       subject: userId,
       expiresIn: `10s`,
-      algorithm: "ES256",
     });
 
     // Gerando um Refresh token
     const refreshToken = randomBytes(64).toString("hex");
 
-    let secretExpiresTime = auth.auth_expired_token as unknown as Date;
     let expires = new Date();
 
-    const iat = new Date().getTime() as unknown as Date;
-    const exp = expires.setTime(secretExpiresTime.getTime()) as unknown as Date;
+    const iat = new Date().getTime();
+    const exp = expires.setTime(auth.auth_expired_token as unknown as number);
 
-    // Realizando a rottividade do token
+    // Realizando a rotatividade do token
 
     // Com isto conseguimos garantir que o token do usuário nunca será mesmo
     // Desta maneira após um prazo determinado, necessáriamente o usuário é
@@ -38,17 +36,23 @@ class SignTokenService {
       userId
     );
 
+    // console.log({ iat, exp });
+
     if (alreadyExistTokens) {
-      (await Promise.all(alreadyExistTokens)).map(async (token) => {
-        await this._refreshTokenRepository.delete(token.id);
-      });
+      await Promise.all(
+        alreadyExistTokens.map(async (token) => {
+          await this._refreshTokenRepository.delete(token.id);
+        })
+      );
     }
+
+    console.log(alreadyExistTokens);
 
     await this._refreshTokenRepository.create({
       userId,
       email,
-      issuedAt: iat,
-      expirationTime: exp,
+      issuedAt: iat as unknown as Date,
+      expirationTime: exp as unknown as Date,
       token: refreshToken,
     });
 
