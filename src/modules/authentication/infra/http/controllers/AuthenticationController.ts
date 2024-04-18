@@ -7,14 +7,14 @@ class AuthenticationController {
     const { email, password } = request.body;
     const loginService = container.resolve(LoginService);
 
-    const { accesToken, user } = await loginService.execute({
+    const { accesToken, refreshToken, user } = await loginService.execute({
       email,
       password,
     });
 
-    response.setHeader("accessToken", accesToken);
+    response.setHeader("accessToken", refreshToken);
 
-    return response.json({ accesToken, user });
+    return response.json({ accesToken, refreshToken, user });
   }
 }
 

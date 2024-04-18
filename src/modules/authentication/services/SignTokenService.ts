@@ -3,6 +3,7 @@ import { RefreshTokenRepository } from "../infra/typeorm/repositories/RefresToke
 import { sign } from "jsonwebtoken";
 import auth from "@config/auth";
 import { randomBytes } from "crypto";
+import dayjs from "dayjs";
 import { SignTokenServiceDTO } from "../dto/SignTokenServiceDTO";
 
 @injectable()
@@ -16,16 +17,14 @@ class SignTokenService {
     // Gerando token
     const accesToken = sign({}, auth.auth_secret_token, {
       subject: userId,
-      expiresIn: `10s`,
+      expiresIn: auth.auth_expired_token,
     });
 
     // Gerando um Refresh token
     const refreshToken = randomBytes(64).toString("hex");
 
-    let expires = new Date();
-
-    const iat = new Date().getTime();
-    const exp = expires.setTime(auth.auth_expired_token as unknown as number);
+    const iat = dayjs().toDate();
+    const exp = dayjs().add(auth.auth_expired_refreshToken, "days").toDate();
 
     // Realizando a rotatividade do token
 
@@ -36,8 +35,6 @@ class SignTokenService {
       userId
     );
 
-    // console.log({ iat, exp });
-
     if (alreadyExistTokens) {
       await Promise.all(
         alreadyExistTokens.map(async (token) => {
@@ -46,13 +43,11 @@ class SignTokenService {
       );
     }
 
-    console.log(alreadyExistTokens);
-
     await this._refreshTokenRepository.create({
       userId,
       email,
-      issuedAt: iat as unknown as Date,
-      expirationTime: exp as unknown as Date,
+      issuedAt: iat,
+      expirationTime: exp,
       token: refreshToken,
     });
 
