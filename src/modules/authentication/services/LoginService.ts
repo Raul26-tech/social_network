@@ -16,7 +16,7 @@ class LoginService {
 
   async execute({ email, password }: LoginServiceDTO) {
     // Validando as entradas do usuário
-    // LoginSchema.parse({ email, password });
+    LoginSchema.parse({ email, password });
 
     const user = await this._userRepository.findByEmail(email);
 

@@ -28,8 +28,6 @@ class RefreshTokenRepository extends BaseRepository {
       expirationTime,
     });
 
-    console.log(refreshToken);
-
     await this._repository.save(refreshToken);
 
     return refreshToken;
