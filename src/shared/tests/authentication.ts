@@ -1,7 +1,7 @@
 import { UserRepository } from "@modules/users/infra/typeorm/repositories/UserRepository";
 import { describe, it } from "node:test";
 import assert from "node:assert";
-import { AuthenticationUserService } from "@modules/authentication/services/AuthenticationUserService";
+import { AuthenticationUserService } from "@modules/authentication/services/LoginService";
 import { IUserRepository } from "@modules/users/irepositories/IUserRepositories";
 import { RefreshTokenRepository } from "@modules/authentication/infra/typeorm/repositories/RefresTokenRepository";
 

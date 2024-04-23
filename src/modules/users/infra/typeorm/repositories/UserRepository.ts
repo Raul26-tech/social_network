@@ -63,6 +63,14 @@ class UserRepository extends BaseRepository {
     return user;
   }
 
+  async findById(id: string) {
+    const user = await this._repository.findOneBy({
+      id,
+    });
+
+    return user;
+  }
+
   async listUsers() {
     const users = await this._repository.find();
 
