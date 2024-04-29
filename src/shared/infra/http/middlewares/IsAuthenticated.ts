@@ -12,8 +12,6 @@ async function isAuthenticated(
   // Extraindo token JWT dos headers
   const bearerToken = request.headers.authorization;
 
-  console.log({ bearerToken });
-
   // Executando a função que verifica a integridade do token
   const { user } = await verifyTokenService.execute({ bearerToken });
 

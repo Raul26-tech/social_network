@@ -18,22 +18,17 @@ class VerifyTokenService {
   ) {}
 
   async execute({ bearerToken, ignoreExpiration = false }: IVerifyTokenDTO) {
-    //Verifica se temos um TOKEN que foi passado através dos headers da aplicação
+    // Verifica se temos um TOKEN que foi passado através dos headers da aplicação
     if (!bearerToken) {
       throw new Error("Nenhum token de autenticação foi detectado.");
     }
-    console.log({ bearerToken });
 
     const [, token] = bearerToken.split(" ");
     const { auth_secret_token } = auth;
 
-    console.log({ token, auth_secret_token });
-
     const { sub } = verify(token, auth_secret_token, {
       ignoreExpiration,
     }) as Payload;
-
-    console.log("sub", sub);
 
     const user = await this._userRepository.findById(sub);
 

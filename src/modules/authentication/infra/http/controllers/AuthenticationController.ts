@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { LoginService } from "../../../services/LoginService";
 import { container } from "@shared/container/inversify.config";
-import { RefreshToken } from "../../typeorm/entities/RefreshToken";
 
 class AuthenticationController {
   async handle(request: Request, response: Response) {

@@ -17,7 +17,7 @@ class SignTokenService {
     // Gerando token
     const accesToken = sign({}, auth.auth_secret_token, {
       subject: userId,
-      expiresIn: auth.auth_expired_token,
+      expiresIn: `${auth.auth_expired_token}d`,
     });
 
     // Gerando um Refresh token
@@ -27,7 +27,6 @@ class SignTokenService {
     const exp = dayjs().add(auth.auth_expired_refreshToken, "days").toDate();
 
     // Realizando a rotatividade do token
-
     // Com isto conseguimos garantir que o token do usuário nunca será mesmo
     // Desta maneira após um prazo determinado, necessáriamente o usuário é
     // obrigado a fazer Login novamente na aplicação
