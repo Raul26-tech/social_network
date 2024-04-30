@@ -13,19 +13,19 @@ class RefreshTokenRepository extends BaseRepository {
     this._repository = this.dataSource.getRepository(RefreshToken);
   }
 
-  async createUserToken({
-    email,
-    expirationTime,
-    issuedAt,
-    token,
+  async create({
     userId,
+    email,
+    token,
+    issuedAt,
+    expirationTime,
   }: ICreateRefreshTokenDTO) {
     const refreshToken = this._repository.create({
       userId,
       email,
       token,
-      expirationTime,
       issuedAt,
+      expirationTime,
     });
 
     await this._repository.save(refreshToken);
@@ -33,9 +33,13 @@ class RefreshTokenRepository extends BaseRepository {
     return refreshToken;
   }
 
-  async findByToken(userId: string) {
-    const user = await this._repository.findOne({ where: { userId } });
-    return user;
+  async findByTokenId(userId: string): Promise<RefreshToken[]> {
+    const token = await this._repository.findBy({ userId });
+    return token;
+  }
+
+  async delete(id: string) {
+    await this._repository.delete(id);
   }
 }
 

@@ -5,7 +5,7 @@ import { Container } from "inversify";
 const container = new Container();
 
 container
-  .bind<UserRepository>("UserRepsitory")
+  .bind<UserRepository>("UserRepository")
   .to(UserRepository)
   .inSingletonScope();
 

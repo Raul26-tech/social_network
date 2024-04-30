@@ -1,39 +1,23 @@
 import { NextFunction, Request, Response } from "express";
-import { AppError } from "../../../errors/AppError";
-import { verify } from "jsonwebtoken";
-import auth from "../../../../config/auth";
+import { container } from "@shared/container/inversify.config";
+import { VerifyTokenService } from "@modules/authentication/services/VerifyTokenService";
 
-interface ITokenPayload {
-  iat: string;
-  exp: number;
-  sub: string;
-}
-
-function isAuthenticated(
+async function isAuthenticated(
   request: Request,
   response: Response,
   next: NextFunction
-): void {
-  const authHeader = request.headers.authorization;
+) {
+  const verifyTokenService = container.resolve(VerifyTokenService);
 
-  if (!authHeader) {
-    throw new AppError("Token inválido");
-  }
-  const token = authHeader.split(" ")[1];
+  // Extraindo token JWT dos headers
+  const bearerToken = request.headers.authorization;
 
-  try {
-    const decodedToken = verify(token, auth.auth_secret_token);
+  // Executando a função que verifica a integridade do token
+  const { user } = await verifyTokenService.execute({ bearerToken });
 
-    const { sub } = decodedToken as unknown as ITokenPayload;
+  request.user = user;
 
-    request.user = {
-      id: sub,
-    };
-
-    return next();
-  } catch (error) {
-    throw new AppError(error);
-  }
+  next();
 }
 
 export { isAuthenticated };
