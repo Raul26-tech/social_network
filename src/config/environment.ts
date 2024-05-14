@@ -21,3 +21,14 @@ export default {
   DB_DATABASE: env.get("DB_DATABASE").required().asString(),
   DB_LOGGING: env.get("DB_LOGGING").asBool(),
 } as IEnvironment;
+
+// export default {
+//   PORT: process.env.PORT,
+//   DB_PORT: process.env.DB_PORT,
+//   DB_TYPE: process.env.DB_TYPE,
+//   DB_HOST: process.env.DB_HOST,
+//   DB_USERNAME: process.env.DB_USERNAME,
+//   DB_PASSWORD: process.env.DB_PASSWORD,
+//   DB_DATABASE: process.env.DB_DATABASE,
+//   DB_LOGGING: process.env.DB_LOGGING,
+// } as unknown as IEnvironment;

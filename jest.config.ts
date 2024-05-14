@@ -1,3 +1,6 @@
+import { compilerOptions } from "./tsconfig.json";
+import { pathsToModuleNameMapper } from "ts-jest";
+
 export default {
   preset: "ts-jest",
   testEnvironment: "node",
@@ -7,5 +10,8 @@ export default {
   },
   testMatch: ["**/*.test.ts"],
   collectCoverageFrom: ["<rootDir>/src/modules/**/services/*.ts"],
-  // moduleNameMapper: {},
+
+  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
+    prefix: "<rootDir>/",
+  }),
 };
