@@ -6,7 +6,9 @@
   "license": "MIT",
   "scripts": {
     "start": "tsx watch --env-file=.env src/shared/infra/server/server.ts",
-    "test": "node --test --watch src/shared/tests/*.ts"
+    "build": "tsc",
+    "test:watch": "NODE_ENV=.env jest",
+    "test": "NODE_ENV=.env jest"
   },
   "dependencies": {
     "@types/express": "^4.17.21",
@@ -27,8 +29,11 @@
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
+    "@types/jest": "^29.5.12",
     "@types/jsonwebtoken": "^9.0.5",
     "@types/node": "^20.10.6",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.3.3"
