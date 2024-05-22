@@ -28,6 +28,7 @@ class VerifyTokenService {
 
     const { sub } = verify(token, auth_secret_token, {
       ignoreExpiration,
+      algorithms: ["none"],
     }) as Payload;
 
     const user = await this._userRepository.findById(sub);
