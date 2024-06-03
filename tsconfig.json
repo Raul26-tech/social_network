@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2016",
+    "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "module": "CommonJS",
@@ -16,7 +17,6 @@
     "resolveJsonModule": true,
     "sourceMap": true,
     "outDir": "dist",
-    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": false,
     "strictPropertyInitialization": false,
