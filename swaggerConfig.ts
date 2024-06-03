@@ -9,9 +9,11 @@ const options = {
       version: "1.0.0",
       description: "Documentação da API",
     },
+    supportedSubmitMethods: [""],
+    operationsSorter: "method",
   },
 
-  apis: ["src/shared/infra/http/routes/index.ts"],
+  apis: ["./src/shared/infra/http/routes/index.ts"],
 };
 
 const specs = swaggerJsdoc(options);
