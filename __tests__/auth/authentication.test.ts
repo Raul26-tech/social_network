@@ -1,7 +1,6 @@
-import assert from "node:assert";
-import { describe, it } from "node:test";
-import { container } from "@shared/container/inversify.config";
+import { describe, expect } from "@jest/globals";
 import { LoginService } from "@modules/authentication/services/LoginService";
+import { container } from "@shared/container/inversify.config";
 
 const loginService = container.resolve(LoginService);
 
@@ -12,6 +11,6 @@ describe("LoginService", () => {
 
     const result = await loginService.execute({ email, password });
 
-    console.log(result);
+    expect(result).toBe(true);
   });
 });
