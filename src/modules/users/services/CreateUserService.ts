@@ -44,6 +44,10 @@ class CreateUSerService {
 
     const hashPassword = await bcrypt.hash(password, 10);
 
+    // Verificando se o usuário colocou foto de perfil
+    if (avatar) {
+    }
+
     const user = await this._userRepository.create({
       name,
       email,
