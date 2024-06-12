@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router, Request } from "express";
 import { userRoutes } from "../../../../modules/users/infra/http/routes/user.routes";
 import { authenticateUserRouter } from "../../../../modules/authentication/infra/http/routes/auth.routes";
 

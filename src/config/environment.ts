@@ -9,6 +9,7 @@ interface IEnvironment {
   DB_PASSWORD: string;
   DB_DATABASE: string;
   DB_LOGGING: boolean;
+  STORAGE_PATH: string;
 }
 
 export default {
@@ -20,6 +21,8 @@ export default {
   DB_PASSWORD: env.get("DB_PASSWORD").required().asString(),
   DB_DATABASE: env.get("DB_DATABASE").required().asString(),
   DB_LOGGING: env.get("DB_LOGGING").asBool(),
+
+  STORAGE_PATH: env.get("STORAGE_PATH").asString() ?? "/tmp",
 } as IEnvironment;
 
 // export default {
